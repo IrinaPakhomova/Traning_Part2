@@ -6,5 +6,6 @@ namespace Business.Users.DataAccessLayer
 {
     class Data
     {
+
     }
 }

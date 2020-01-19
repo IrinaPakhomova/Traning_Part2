@@ -4,9 +4,9 @@
     {
         User GetUser(string name);
 
-        User AddUser(User user);
+        bool AddUser(User user); 
 
-        User EditUSer(User user);
+        User EditUSer(User user, string password);
 
         bool DeleteUser(User user);
     }
