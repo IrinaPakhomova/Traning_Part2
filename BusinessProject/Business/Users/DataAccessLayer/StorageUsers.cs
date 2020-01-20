@@ -10,14 +10,16 @@ namespace Business.Users.DataAccessLayer
         private const string pathFileUsers = @"user.txt";
         private const string pathFileUsersTemp = @"usertemp.txt";
         private static StorageUsers instance;
+       
         private StorageUsers()
         {
-            if (!File.Exists(pathFileUsers))
+          if (!File.Exists(pathFileUsers))
             {
-                File.Create(pathFileUsers);
+                File.Create(pathFileUsers).Close();
             }
         }
-        public static StorageUsers getInstance()
+
+       public static StorageUsers getInstance()
         {
             if (instance == null)
                 instance = new StorageUsers();
@@ -35,6 +37,10 @@ namespace Business.Users.DataAccessLayer
         }
         public List<User> ReadUsersFromStorage()
         {
+           /* if (!File.Exists(pathFileUsers))
+            {
+                File.Create(pathFileUsers).Close();
+            }*/
             List<User> list = new List<User>();
             using (StreamReader sr = new StreamReader(pathFileUsers, System.Text.Encoding.Default))
             {

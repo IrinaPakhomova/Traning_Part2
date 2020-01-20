@@ -14,11 +14,11 @@ namespace Business.Users.DataAccessLayer
             if (someUser == null)
             {
                 storage.AddDataToStorage(user);
-                if (File.Exists(user.Name))
+                if (File.Exists(user.Name+".txt"))
                 {
-                    File.Delete(user.Name);
+                    File.Delete(user.Name+".txt");
                 }
-                File.Create(user.Name);
+                File.Create(user.Name+".txt").Close();
                 return true;
             }
             else

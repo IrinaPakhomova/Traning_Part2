@@ -1,7 +1,8 @@
 ﻿using System;
 using Business.UserDataValidation;
 using Business.Users;
-using Business.Users.DataAccessLayer;
+using Business.Calculator;
+using System.Text;
 
 namespace Business
 {
@@ -10,14 +11,39 @@ namespace Business
         static void Main(string[] args)
         {
             UI ui = new UI();
-            User user = ui.processStart();
-
-            
-            if (user != null)
+            bool exitflag = false;
+            User user = null;
+            do
             {
-                Console.WriteLine("Теперь посчитаем)");
-            }
-            else { Console.WriteLine("нет Калькулятора!"); }
+                if (user == null) 
+                {
+                    user = ui.processStart();
+                }
+                    
+                if (user != null)
+                {
+                    ui.Calculation();
+                    Console.WriteLine("Вы хотите выйти? (Y)");
+                    if (Console.ReadLine().ToUpper() == "Y")
+                    {
+                        exitflag = true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Вы хотите выйти? (Y)");
+                    if (Console.ReadLine().ToUpper() == "Y")
+                    {
+                        exitflag = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Попрубуйте еще раз войти!");
+                    }
+                }
+            } while (!exitflag);
+            
+            
         
 
             Console.ReadKey();

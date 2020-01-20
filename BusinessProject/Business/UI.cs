@@ -2,13 +2,16 @@
 using Business.Users.DataAccessLayer;
 using System;
 using Business.Users;
+using System.Text;
+using Business.Calculator;
+using System.IO;
 
 namespace Business
 {
     class UI
     {
         private readonly IUserData users;
-        
+        private User user;
         public UI()
         {
             users = new UserData();
@@ -17,25 +20,26 @@ namespace Business
         public User processStart()
         {
             const string info = "Программа калькулятор:"
-                              + "\nВыберите нужный пункт меню:\n 1.Регистрация нового пользователя"
+                              + "\nВыберите нужный пункт меню:\n 1. Регистрация нового пользователя"
                               + " \n 2. Войти в систему под пользователем"
                               + " \n 3. Удалить аккаунт \n4. Изменить пароль пользователя";
                               //\n 3. Исправить данные пользователя \n 4. Удалить пользователя \n 5.Выход из программы";
 
-            User user = null;
-            bool userFlag = false;
             int operation;
             Console.WriteLine(info);
-            Console.Write("Введите номер операции:");
             do
             {
+                Console.Write("Введите номер операции:");
                 if (int.TryParse(Console.ReadLine(), out operation))
                 {
                     if (operation >= 1 && operation <= 4)
                     {
                         break;
                     }
-                    Console.WriteLine("Не корректные данные");
+                    else 
+                    {
+                        Console.WriteLine("Не корректные данные"); 
+                    }
                 }
             } while (true);
 
@@ -43,7 +47,7 @@ namespace Business
             {
                 case 1:
                     {
-                        user = InputeDataUser();
+                        this.user= InputeDataUser();
                         if (!users.AddUser(user))
                         {
                             user = null;
@@ -110,7 +114,55 @@ namespace Business
 
         public void Calculation()
         {
+            if (user != null)
+            {
+                StringBuilder sb = new StringBuilder(DateTime.Today.ToString());
+                Console.WriteLine("Посчитаем теперь");
+                Console.Write("Введите число a=");
+                string a = Console.ReadLine();
+                Console.Write("Введите число b=");
+                string b = Console.ReadLine();
 
+                Calculator<Object> calс = new Calculator<Object>();
+                bool notCalcYet = false;
+                if (Int32.TryParse(a, out int resultInt1) && Int32.TryParse(b, out int resultInt2))
+                {
+                    sb.Append(a).Append("+").Append(b).Append("=").Append(calс.Addition(resultInt1, resultInt2)).Append("\n");
+                    sb.Append(a).Append("/").Append(b).Append("=").Append(calс.Division(resultInt1, resultInt2)).Append("\n");
+                    sb.Append(a).Append("*").Append(b).Append("=").Append(calс.Multiplication(resultInt1, resultInt2)).Append("\n");
+                    sb.Append(a).Append("-").Append(b).Append("=").Append(calс.Subtraction(resultInt1, resultInt2)).Append("\n");
+                    notCalcYet = true;
+                }
+                if (Double.TryParse(a, out double resultDec1) && Double.TryParse(b, out double resultDec2) && !notCalcYet)
+                {
+                    sb.Append(a).Append("+").Append(b).Append("=").Append(calс.Addition(resultDec1, resultDec2)).Append("\n");
+                    sb.Append(a).Append("/").Append(b).Append("=").Append(calс.Division(resultDec1, resultDec2)).Append("\n");
+                    sb.Append(a).Append("*").Append(b).Append("=").Append(calс.Multiplication(resultDec1, resultDec2)).Append("\n");
+                    sb.Append(a).Append("-").Append(b).Append("=").Append(calс.Subtraction(resultDec1, resultDec2)).Append("\n");
+                    notCalcYet = true;
+                }
+                if (Char.TryParse(a, out char resultChar1) && Char.TryParse(b, out char resultChar2) && !notCalcYet)
+                {
+                    sb.Append(a).Append("+").Append(b).Append("=").Append(calс.Addition(resultChar1, resultChar2)).Append("\n");
+                    sb.Append(a).Append("/").Append(b).Append("=").Append(calс.Division(resultChar1, resultChar2)).Append("\n");
+                    sb.Append(a).Append("*").Append(b).Append("=").Append(calс.Multiplication(resultChar1, resultChar2)).Append("\n");
+                    sb.Append(a).Append("-").Append(b).Append("=").Append(calс.Subtraction(resultChar1, resultChar2)).Append("\n");
+                    notCalcYet = true;
+                }
+                if (!notCalcYet)
+                {
+                    sb.Append(a).Append("+").Append(b).Append("=").Append(calс.Addition(a, b)).Append("\n");
+                    sb.Append(a).Append("/").Append(b).Append("=").Append(calс.Division(a, b)).Append("\n");
+                    sb.Append(a).Append("*").Append(b).Append("=").Append(calс.Multiplication(a, b)).Append("\n");
+                    sb.Append(a).Append("-").Append(b).Append("=").Append(calс.Subtraction(a, b)).Append("\n");
+                }
+                string filename = user.Name + ".txt";
+                using (StreamWriter sw = new StreamWriter(filename, true, System.Text.Encoding.Default))
+                {
+                        sw.WriteLine(sb);
+                }
+
+            }
         }
 
         public User InputeDataUser()
