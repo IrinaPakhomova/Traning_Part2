@@ -4,8 +4,7 @@ namespace Business.Calculator
 {
     class Calculator<T> : ICalculator<T> //where T:struct
     { 
-        public T Addition(T value1,
-               T value2)
+        public T Addition(T value1,T value2)
         {
             Object tempValue1 = value1;
             Object tempValue2 = value2;
