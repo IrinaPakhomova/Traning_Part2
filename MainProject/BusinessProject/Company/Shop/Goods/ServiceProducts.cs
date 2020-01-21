@@ -6,26 +6,11 @@ namespace Company.Shop.Goods
 {
     public class ServiceProducts : IServiceProduct
     {
-        public decimal Percent
-        {
-            get { return Percent; }
-            set
-            {
-                if (value <= 0)
-                {
-                    Console.WriteLine("нельзя быть таким щедрым");
-                }
-                else
-                {
-                    Percent = value;
-                }
-            }
-        }
+        public decimal Percent { get; set; } = 50;
         private List<Product> products;
         public ServiceProducts()
         {
             products = new List<Product>();
-            Percent = 50;
         }
 
         public void AddProduct(Product product)
@@ -76,6 +61,8 @@ namespace Company.Shop.Goods
         {
             return this.products;
         }
-       
+        public decimal GetPercent() { return Percent; }
+
+
     }
 }

@@ -6,7 +6,6 @@ namespace Company.Shop.Goods
 {
     interface IServiceProduct
     {
-        decimal Percent { get; set; }
         void AddProduct(Product product);
 
         Product GetTheSameProduct(Product product);
@@ -14,5 +13,7 @@ namespace Company.Shop.Goods
         decimal AllProductsCosts();
 
         List<Product> GetAllProducts();
+
+        decimal GetPercent();
     }
 }

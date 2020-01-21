@@ -26,7 +26,7 @@ namespace Company.Shop
             // Console.WriteLine("Бизнес создан:");
         }
         
-       /* public void Process() 
+        public void Process() 
         {
             decimal fixExpenses = calculator.TotalFixedExpenses(serviceRent.countValueAllRent(), serviceWorkers.SalaryWorkerCosts());
             Console.WriteLine($"Итого постоянных расходов: {fixExpenses}");
@@ -34,11 +34,11 @@ namespace Company.Shop
             Console.WriteLine($"Итого постоянных расходов: {variableExpenses}");
             Console.WriteLine("-".PadRight(20));
             Console.WriteLine($"Итого расходов: {fixExpenses + variableExpenses}");
-            decimal incomeSales = calculator.CountIncome(serviceProduct.AllProductsCosts(), serviceProduct.Percent);
+            decimal incomeSales = calculator.CountIncome(serviceProduct.AllProductsCosts(), serviceProduct.GetPercent());
             Console.WriteLine($"Доходы с продаж: {incomeSales}");
             Console.WriteLine($"Дельта:{calculator.Delta(incomeSales, (fixExpenses + variableExpenses))}");
 
-        }*/
+        }
         public void Start()
         {
             Product good;
@@ -103,8 +103,7 @@ namespace Company.Shop
                 Console.WriteLine(item);
             }
 
-
-        }
+      }
         private Worker InputDataWorker()
         {
             Console.Write("Введите фамилию:");

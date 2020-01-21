@@ -10,7 +10,7 @@ namespace Company
         {
             Business business = new Business();
             business.Start();
-           // business.Process();
+            business.Process();
             Console.ReadKey();
         }
     }
