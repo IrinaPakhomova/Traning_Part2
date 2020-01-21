@@ -6,15 +6,31 @@ namespace Company.Shop.Goods
 {
     public class ServiceProducts : IServiceProduct
     {
+        public decimal Percent
+        {
+            get { return Percent; }
+            set
+            {
+                if (value <= 0)
+                {
+                    Console.WriteLine("нельзя быть таким щедрым");
+                }
+                else
+                {
+                    Percent = value;
+                }
+            }
+        }
         private List<Product> products;
         public ServiceProducts()
         {
             products = new List<Product>();
+            Percent = 50;
         }
 
         public void AddProduct(Product product)
         {
-            if (GetSameProduct(product) != null)
+            if (GetTheSameProduct(product) != null)
             {
                 ChangeProductCount(product);
             }
@@ -23,7 +39,7 @@ namespace Company.Shop.Goods
                 products.Add(product);
             }
         }
-        public Product GetSameProduct(Product product)
+        public Product GetTheSameProduct(Product product)
         {
             Product sameProduct = null;
             foreach (Product tempProduct in products)
@@ -36,7 +52,7 @@ namespace Company.Shop.Goods
             }
             return sameProduct;
         }
-        public void ChangeProductCount(Product product)
+        private void ChangeProductCount(Product product)
         {
             foreach (Product tempProduct in products)
             {
@@ -47,7 +63,7 @@ namespace Company.Shop.Goods
                 }
             }
         }
-        public decimal costAllProducts(List<Product> list)
+        public decimal AllProductsCosts()
         {
             decimal value = 0;
             foreach (Product item in products)
@@ -56,10 +72,10 @@ namespace Company.Shop.Goods
             }
             return value;
         }
-        public List<Product> getProducts()
+        public List<Product> GetAllProducts()
         {
             return this.products;
         }
-
+       
     }
 }

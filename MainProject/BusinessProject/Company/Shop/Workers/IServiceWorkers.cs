@@ -6,9 +6,9 @@ namespace Company.Shop.Workers
 {
     interface IServiceWorkers
     {
-        void addNewWorker(Worker worker);
-        bool existWorker(Worker worker);
-        bool deleteWorkere(Worker worker);
-        List<Worker> getListOfWorker();
+        void AddNewWorker(Worker worker);
+        bool ExistWorker(Worker worker);
+        List<Worker> GetListOfWorker();
+        decimal SalaryWorkerCosts();
     }
 }

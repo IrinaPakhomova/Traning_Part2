@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessProject", "BusinessProject\BusinessProject.csproj", "{CC491A4D-C676-4B97-A277-0B84E6597300}"
 EndProject
@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Company", "Company\Company.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test", "Test\Test.csproj", "{B948D3ED-DB51-4DE7-AC99-F2CE76AC9A6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Answer-Question", "Answer-Question\Answer-Question.csproj", "{59C385E8-923F-4719-B2AB-01D8402DDDEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Answer-Question", "Answer-Question\Answer-Question.csproj", "{59C385E8-923F-4719-B2AB-01D8402DDDEA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

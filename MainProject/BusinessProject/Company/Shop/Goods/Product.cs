@@ -9,8 +9,8 @@ namespace Company.Shop.Goods
         public string NameProduct { get; private set; }
         public decimal Price { get; private set; }
         public int Count { get; set; }
-
-        Product(string nameProduct, decimal price, int count)
+        
+        public Product(string nameProduct, decimal price, int count)
         {
             NameProduct = nameProduct;
             Price = price;
