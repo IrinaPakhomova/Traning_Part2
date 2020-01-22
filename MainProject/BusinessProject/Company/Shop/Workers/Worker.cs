@@ -40,7 +40,7 @@ namespace Company.Shop.Workers
 
         public override string ToString()
         {
-            return "Name: " + this.FirstName + " " + this.LastName + "; Position: " + this.EmployeePosition + "; Salary " + this.Salary;
+            return "Фамилия: " + this.FirstName + " " + this.LastName + "; Должность: " + this.EmployeePosition + "; Зарплата: " + this.Salary;
         }
     }
 }

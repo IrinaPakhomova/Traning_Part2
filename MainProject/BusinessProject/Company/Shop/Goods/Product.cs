@@ -26,7 +26,7 @@ namespace Company.Shop.Goods
 
         public override string ToString()
         {
-            return "Product: " + this.NameProduct + ";  Price: " + this.Price + "; Count " + this.Count;
+            return "Товар: " + this.NameProduct + ";  Цена: " + this.Price + "; Количество: " + this.Count;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Company.Shop.RentArea
 
         public override string ToString()
         {
-            return "Product: " + this.NameArea + ";  Price: " + this.Price ;
+            return "Помещение: " + this.NameArea + ";  Аренда: " + this.Price ;
         }
     }
 }

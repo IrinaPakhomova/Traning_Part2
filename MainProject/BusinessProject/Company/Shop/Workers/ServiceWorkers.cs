@@ -17,6 +17,7 @@ namespace Company.Shop.Workers
             if (worker != null && !ExistWorker(worker))
             {
                 workers.Add(worker);
+                Console.WriteLine($"Сотрудник {worker} нанят");
             }
             else 
             {

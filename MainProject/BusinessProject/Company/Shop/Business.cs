@@ -28,16 +28,37 @@ namespace Company.Shop
         
         public void Process() 
         {
+            Console.WriteLine("-".PadLeft(20, '-'));
+            Console.WriteLine("\nПерсонал:");
+            foreach (Worker worker in serviceWorkers.GetListOfWorker())
+            {
+                Console.WriteLine(worker);
+            }
+            Console.WriteLine("\nПеречень товаров:");
+            foreach (Product product in serviceProduct.GetAllProducts())
+            {
+                Console.WriteLine(product);
+            }
+            Console.WriteLine("\nАренда помещений:");
+            foreach (Rent item in serviceRent.getAllRent())
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine("-".PadLeft(20, '-'));
             decimal fixExpenses = calculator.TotalFixedExpenses(serviceRent.countValueAllRent(), serviceWorkers.SalaryWorkerCosts());
             Console.WriteLine($"Итого постоянных расходов: {fixExpenses}");
             decimal variableExpenses = calculator.TotalVariableExpenses(serviceProduct.AllProductsCosts());
             Console.WriteLine($"Итого постоянных расходов: {variableExpenses}");
-            Console.WriteLine("-".PadRight(20));
+            Console.WriteLine("-".PadLeft(20,'-'));
             Console.WriteLine($"Итого расходов: {fixExpenses + variableExpenses}");
             decimal incomeSales = calculator.CountIncome(serviceProduct.AllProductsCosts(), serviceProduct.GetPercent());
             Console.WriteLine($"Доходы с продаж: {incomeSales}");
-            Console.WriteLine($"Дельта:{calculator.Delta(incomeSales, (fixExpenses + variableExpenses))}");
-
+            decimal saldo = calculator.Delta(incomeSales, (fixExpenses + variableExpenses));
+            Console.WriteLine($"Сальдо:{saldo}");
+            decimal factor = saldo / (fixExpenses + variableExpenses) * 100;
+            if (factor > 20) { Console.WriteLine("Стоит рассмотреть этот бизнес"); }
+            else if (factor <= 0) { Console.WriteLine("Бизнес убыточен"); }
+            else { Console.WriteLine("Быстрее это дело не оправдает надежд"); }
         }
         public void Start()
         {
@@ -59,13 +80,8 @@ namespace Company.Shop
             }
             while (isAdd != "N");
 
-            Console.WriteLine("\nПерсонал состоит:");
-            foreach (Worker worker in serviceWorkers.GetListOfWorker()) 
-            {
-                Console.WriteLine(worker);
-            }
-
-            Console.WriteLine("\nДобавим товары");
+            
+            Console.WriteLine("\nДобавим товары:");
             do
             {
                 Console.Write("Добавим товар (Y/N): ");
@@ -77,14 +93,8 @@ namespace Company.Shop
                 }
             }
             while (isAdd != "N");
-            Console.WriteLine("\nПеречень товаров состоит:");
-
-            foreach (Product product in serviceProduct.GetAllProducts())
-            {
-                Console.WriteLine(product);
-            }
-
-            Console.WriteLine("\nДобавим аренду помещений");
+            
+            Console.WriteLine("\nДобавим аренду помещений:");
             do
             {
                 Console.Write("Добавим аренду (Y/N): ");
@@ -96,12 +106,7 @@ namespace Company.Shop
                 }
             }
             while (isAdd != "N");
-            Console.WriteLine("Арендованные помещения:");
-
-            foreach (Rent item in serviceRent.getAllRent())
-            {
-                Console.WriteLine(item);
-            }
+            
 
       }
         private Worker InputDataWorker()
@@ -110,7 +115,7 @@ namespace Company.Shop
             string firstName = Console.ReadLine();
             Console.Write("Введите имя:");
             string lastName = Console.ReadLine();
-            Console.WriteLine("Перечень профессий:");
+            Console.WriteLine("Выбирите профессию из списка:");
             for (int i = 1; i<= 5; i++) 
             {
                 Console.WriteLine($"{i}.  {Enum.GetName(typeof(Position), i)}");
@@ -118,7 +123,7 @@ namespace Company.Shop
             Position personPosition;
             do
             {
-                Console.Write("Номер профессии:");
+                Console.Write("Введите номер профессии:");
                 if (!Validator.isCorrectIntegerData(Console.ReadLine(), 1, 5, out int position))
                 {
                     Console.WriteLine("Значение должно быть от 1 до 5");
